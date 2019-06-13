@@ -1,4 +1,4 @@
-﻿using NodaTime;
+﻿using System;
 
 namespace StandardCache
 {
@@ -7,47 +7,47 @@ namespace StandardCache
         public string Key { get; }
         public object Item { get; private set; }
 
-        public Instant CreatedAt { get; }
-        public Instant LastUpdatedAt { get; private set; }
-        public Instant LastAccessedAt { get; private set; }
-        public Instant ExpiresAt { get; private set; }
+        public DateTime CreatedAt { get; }
+        public DateTime LastUpdatedAt { get; private set; }
+        public DateTime LastAccessedAt { get; private set; }
+        public DateTime ExpiresAt { get; private set; }
 
-        public CacheItem(string key, object item, Instant expiresAt)
+        public CacheItem(string key, object item, DateTime expiresAt)
         {
             Key = key;
             Item = item;
             ExpiresAt = expiresAt;
-            CreatedAt = SystemClock.Instance.GetCurrentInstant();
+            CreatedAt = DateTime.UtcNow;
         }
 
-        public CacheItem(string key, object item) : this(key, item, SystemClock.Instance.GetCurrentInstant())
+        public CacheItem(string key, object item) : this(key, item, DateTime.UtcNow)
         {
 
         }
 
         internal void Touch()
         {
-            LastAccessedAt = SystemClock.Instance.GetCurrentInstant();
+            LastAccessedAt = DateTime.UtcNow;
         }
 
         public bool IsExpired()
         {
-            return ExpiresAt > SystemClock.Instance.GetCurrentInstant();
+            return ExpiresAt > DateTime.UtcNow;
         }
 
         public CacheItem Update(CacheItem item)
         {
             Item = item.Item;
             ExpiresAt = item.ExpiresAt;
-            LastUpdatedAt = SystemClock.Instance.GetCurrentInstant();
+            LastUpdatedAt = DateTime.UtcNow;
 
             return this;
         }
 
-        public void ExtendExpiration(Duration duration)
+        public void ExtendExpiration(double durationInMinutes)
         {
-            ExpiresAt = ExpiresAt.Plus(duration);
-            LastUpdatedAt = SystemClock.Instance.GetCurrentInstant();
+            ExpiresAt = ExpiresAt.AddMinutes(durationInMinutes);
+            LastUpdatedAt = DateTime.UtcNow;
         }
     }
 }

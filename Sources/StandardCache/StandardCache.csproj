@@ -7,11 +7,8 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/anatolia/standard-cache</PackageProjectUrl>
     <RepositoryUrl>https://github.com/anatolia/standard-cache</RepositoryUrl>
+    <Version>1.0.1</Version>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="NodaTime" Version="2.4.5" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\..\LICENSE">

@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <Company>anatolia.solutions</Company>
     <Description>a simple in memory cache implementation</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/anatolia/standard-cache</PackageProjectUrl>
     <RepositoryUrl>https://github.com/anatolia/standard-cache</RepositoryUrl>
-    <Version>1.0.1</Version>
+    <Version>1.0.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
